@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="docs/images/logo.png" alt="Orbit logo" width="96" height="96">
+</p>
+
+<p align="center">
   <img src="docs/images/cover.png" alt="Orbit — your server, run by Claude, from any browser" width="100%">
 </p>
 
@@ -15,6 +19,15 @@
   <img alt="Node >= 18.17" src="https://img.shields.io/badge/node-%E2%89%A518.17-111111">
   <img alt="Build: none" src="https://img.shields.io/badge/build_step-none-111111">
   <img alt="Self-hosted" src="https://img.shields.io/badge/self--hosted-yes-111111">
+</p>
+
+<p align="center">
+  <a href="https://www.paypal.com/paypalme/Gtsnobiladze" target="_blank">
+    <img src="https://img.shields.io/badge/Donate-Support%20Orbit-blueviolet?style=for-the-badge&logo=paypal&logoColor=white" alt="Donate with PayPal">
+  </a>
+  <a href="https://ko-fi.com/thecmdguy" target="_blank">
+    <img src="https://img.shields.io/badge/Ko--fi-Buy%20me%20a%20coffee-ff5e5e?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Support on Ko-fi">
+  </a>
 </p>
 
 > Orbit is a community project. It is not affiliated with or endorsed by Anthropic.
@@ -153,6 +166,19 @@ bin/                    setup + launcher scripts
 nginx/orbit.conf.example   reverse-proxy config for production
 ecosystem.config.cjs    pm2 process definitions
 ```
+
+## Support
+
+If Orbit is useful to you, you can support its development:
+
+<p align="center">
+  <a href="https://www.paypal.com/paypalme/Gtsnobiladze" target="_blank">
+    <img src="https://img.shields.io/badge/Donate-Support%20Orbit-blueviolet?style=for-the-badge&logo=paypal&logoColor=white" alt="Donate with PayPal">
+  </a>
+  <a href="https://ko-fi.com/thecmdguy" target="_blank">
+    <img src="https://img.shields.io/badge/Ko--fi-Buy%20me%20a%20coffee-ff5e5e?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Support on Ko-fi">
+  </a>
+</p>
 
 ## License
 
