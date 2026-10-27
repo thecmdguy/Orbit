@@ -89,5 +89,6 @@ transcripts (`projects/`).
 - `chat.html` / `chat.js` / `chat.css` — the chat UI, routing (`#/monitor`, `#/sites`, …),
   permission cards, Explain popover, Auto-approve, settings.
 - `monitor.js`, `sites.js`, `editor.js` (Monaco), `usage-widget.js`, `skills-ui.js`, `pwa-ui.js`.
-- `pwa/` — manifest, service worker, icons, and iOS splash screens for "Add to Home Screen".
+- `pwa/` — manifest, service worker, icons, and iOS splash screens. Installable on iOS **and**
+  Android (Chrome shows a native "Install app" prompt); splash screens are an iOS-only nicety.
 - Third-party libs (xterm, marked, DOMPurify, Monaco) are served from `node_modules`.

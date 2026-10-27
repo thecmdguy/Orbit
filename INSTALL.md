@@ -172,4 +172,5 @@ sudo systemctl daemon-reload && sudo systemctl enable --now orbit
 - **Terminal fails to start** — `node-pty` needs `build-essential` + `python3` at install time.
 - **Multi-model picker doesn't open** — the multi-model UI is experimental and ships without its
   client script; the rest of Orbit is unaffected.
-- **Push notifications** — only work over HTTPS and, on iOS, only after "Add to Home Screen".
+- **Push notifications** — require HTTPS. On Android they work in Chrome (installed or not); on iOS
+  they work only after "Add to Home Screen" (an Apple requirement for web push).

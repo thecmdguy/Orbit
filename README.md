@@ -10,7 +10,7 @@
 
 <p align="center">
   A self-hosted web client for <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a> —
-  chat with tool approvals, a live server monitor, a file editor, site backups, skills, and iOS push.
+  chat with tool approvals, a live server monitor, a file editor, site backups, skills, and push notifications.
   <br>One tab, on your laptop, phone, or VPS.
 </p>
 
@@ -52,8 +52,8 @@
 </table>
 
 <p align="center">
-  <img src="docs/images/mobile.jpg" alt="Orbit on iPhone" width="300"><br>
-  <sub><b>Installable iOS app</b> — add to Home Screen, with live Web Push notifications</sub>
+  <img src="docs/images/mobile.jpg" alt="Orbit installed on a phone" width="300"><br>
+  <sub><b>Installable mobile app (iOS &amp; Android)</b> — add to the Home Screen, with live Web Push notifications</sub>
 </p>
 
 ---
@@ -72,9 +72,9 @@
   DB dumps, TLS certs).
 - **Skills** — install Claude Code skills straight from GitHub.
 - **Terminal** — a real pty terminal in the browser as a fallback.
-- **Installable app (PWA)** — add to your iPhone Home Screen with live Web Push notifications
-  (approval needed / task finished / server alerts).
-- **Monochrome, responsive design** — looks native on desktop and iOS.
+- **Installable app (PWA)** — add it to your phone's Home Screen on **iOS and Android** for live Web
+  Push notifications (approval needed / task finished / server alerts).
+- **Monochrome, responsive design** — looks native on desktop, iOS, and Android.
 
 ## How it works (in one paragraph)
 
