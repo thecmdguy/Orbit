@@ -1,0 +1,26 @@
+# dependencies
+node_modules/
+
+# local configuration & secrets — NEVER commit these
+.env
+config.json
+password
+push.json
+quick.json
+links.json
+schedule.json
+*.credentials.json
+
+# runtime data
+changes/
+models-data/
+uploads/
+trash/
+backups/
+*.log
+
+# editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp

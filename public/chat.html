@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#121212">
+<!-- Orbit Home Screen app -->
+<link rel="manifest" href="/claude/manifest.webmanifest?v=2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Orbit">
+<meta name="application-name" content="Orbit">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="/claude/pwa/icon-180.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/claude/pwa/icon-180.png">
+<link rel="apple-touch-startup-image" href="/claude/pwa/splash-1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/claude/pwa/splash-1179x2556.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/claude/pwa/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/claude/pwa/splash-1284x2778.png" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/claude/pwa/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/claude/pwa/splash-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/claude/pwa/splash-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/claude/pwa/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/claude/pwa/splash-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/claude/pwa/splash-1206x2622.png" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/claude/pwa/splash-1320x2868.png" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<!-- /Orbit Home Screen app -->
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap">
+<title>Orbit</title>
+<script>try{var t=localStorage.getItem("orbit_theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="/claude/chat.css">
+</head>
+<body>
+<div id="app">
+  <aside id="side">
+    <div class="brand"><span class="brand-mark"><img src="/claude/logo-mark.png?v=orbit3" alt=""></span><span class="brand-name">Orbit</span></div>
+    <nav class="side-nav">
+      <a href="#/" id="navChat" class="nav-item">
+        <svg viewBox="0 0 20 20" width="17" height="17"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h7A2.5 2.5 0 0 1 16 5.5v5a2.5 2.5 0 0 1-2.5 2.5H9l-3.5 3v-3H6.5A2.5 2.5 0 0 1 4 10.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        Chat
+      </a>
+      <a href="#/editor" id="navEditor" class="nav-item">
+        <svg viewBox="0 0 20 20" width="17" height="17"><path d="M7 6l-4 4 4 4M13 6l4 4-4 4M11 4.5l-2 11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Editor
+        <span id="navDirty" class="nav-badge job" hidden></span>
+      </a>
+      <a href="#/monitor" id="navMonitor" class="nav-item">
+        <svg viewBox="0 0 20 20" width="17" height="17"><path d="M2.5 10h3l2-5 3.5 10 2-5h4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Monitor
+        <span id="navAlert" class="nav-badge" hidden></span>
+      </a>
+      <a href="#/sites" id="navSites" class="nav-item">
+        <svg viewBox="0 0 20 20" width="17" height="17"><rect x="3" y="3.5" width="14" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="11.5" width="14" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6.25" cy="6" r=".9" fill="currentColor"/><circle cx="6.25" cy="14" r=".9" fill="currentColor"/></svg>
+        Sites &amp; backups
+        <span id="navJob" class="nav-badge job" hidden></span>
+      </a>
+      <a href="#/skills" id="navSkills" class="nav-item">
+        <svg viewBox="0 0 20 20" width="17" height="17"><path d="M10 2.75l1.9 4.1 4.35.5-3.22 2.97.86 4.3L10 12.45l-3.89 2.17.86-4.3L3.75 7.35l4.35-.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        Skills
+      </a>
+      <a href="/claude/terminal" class="nav-item">
+        <svg viewBox="0 0 20 20" width="17" height="17"><rect x="2.75" y="3.75" width="14.5" height="12.5" rx="2.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 8l2.5 2L6 12M10.5 12.5h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Terminal
+      </a>
+      <a href="#/settings" id="navSettings" class="nav-item">
+        <svg viewBox="0 0 20 20" width="17" height="17"><circle cx="10" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 2.5l1.3 1.9 2.2-.6.4 2.3 2.2.8-.9 2.1 1.4 1.8-2 1.2.1 2.3-2.3.2-.9 2.1-2-1.1-2 1.1-.9-2.1-2.3-.2.1-2.3-2-1.2 1.4-1.8-.9-2.1 2.2-.8.4-2.3 2.2.6z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        Settings
+        <span id="navUpd" class="nav-badge" hidden>1</span>
+      </a>
+    </nav>
+    <div class="side-top">
+      <button id="newChat" class="new-chat">
+        <svg viewBox="0 0 20 20" width="15" height="15"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        New chat
+      </button>
+    </div>
+    <div class="side-label">Recent</div>
+    <nav id="sessions"></nav>
+    <a href="#/monitor" id="miniPulse" class="mini-pulse" title="Live server load">
+      <div class="mp-head"><span class="live-dot"></span><span id="mpHost">Server</span><span class="sp"></span><span id="mpUp" class="mono"></span></div>
+      <div class="mp-row"><span>CPU</span><i><b id="mpCpuBar"></b></i><em id="mpCpu" class="mono">–</em></div>
+      <div class="mp-row"><span>MEM</span><i><b id="mpMemBar"></b></i><em id="mpMem" class="mono">–</em></div>
+      <div class="mp-row"><span>DISK</span><i><b id="mpDiskBar"></b></i><em id="mpDisk" class="mono">–</em></div>
+    </a>
+    <div class="side-foot" hidden>
+      <a href="#" id="notifBtn" class="notif-link">
+        <svg viewBox="0 0 20 20" width="15" height="15"><path d="M10 3a4.5 4.5 0 0 0-4.5 4.5v2.7L4 13.5h12l-1.5-3.3V7.5A4.5 4.5 0 0 0 10 3zM8.2 15.5a1.9 1.9 0 0 0 3.6 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span id="notifLabel">Notifications</span>
+      </a>
+      <a href="/claude/logout">
+        <svg viewBox="0 0 20 20" width="15" height="15"><path d="M8 4H5.5A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8M12 13.5L15.5 10 12 6.5M15.5 10H8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Log out
+      </a>
+    </div>
+  </aside>
+  <div id="scrim"></div>
+
+  <main id="main">
+    <header id="top">
+      <button id="menu" class="icon-btn" aria-label="Menu">
+        <svg viewBox="0 0 20 20" width="20" height="20"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <div id="title">New chat</div>
+      <button id="themeBtn" class="theme-btn" type="button" aria-label="Switch theme" title="Switch to dark mode">
+        <svg class="moon" viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><path d="M16 12.2A6.5 6.5 0 0 1 7.8 4a6.5 6.5 0 1 0 8.2 8.2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <svg class="sun" viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><circle cx="10" cy="10" r="3.3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 2.5v1.8M10 15.7v1.8M2.5 10h1.8M15.7 10h1.8M4.7 4.7l1.3 1.3M14 14l1.3 1.3M4.7 15.3L6 14M14 6l1.3-1.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div id="usage" class="usage">
+        <button id="usageBtn" class="usage-btn" aria-haspopup="dialog" aria-expanded="false" title="Claude usage">
+          <svg class="u-ring" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="10" cy="10" r="7.5" class="trk"/><circle cx="10" cy="10" r="7.5" class="val" id="usageRing"/></svg>
+          <span class="u-txt"><b id="usagePct">–</b><span class="u-sub" id="usageSub">usage</span></span>
+        </button>
+        <div id="usagePop" class="usage-pop" role="dialog" aria-label="Claude usage" hidden></div>
+      </div>
+      <span id="conn" class="conn" title="Connection"></span>
+    </header>
+
+    <section id="viewMonitor" hidden>
+      <div class="mon">
+        <div class="card summary">
+          <div>
+            <p class="eyebrow">Server overview</p>
+            <h1 id="monHeadline">Loading live metrics…</h1>
+            <p id="monSub" class="muted"></p>
+            <div id="monStats" class="stats"></div>
+          </div>
+          <div class="gauges">
+            <div class="gauge" data-g="cpu"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" class="g-track"/><circle cx="32" cy="32" r="27" class="g-val"/></svg><b class="mono">–</b><span>CPU</span></div>
+            <div class="gauge" data-g="mem"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" class="g-track"/><circle cx="32" cy="32" r="27" class="g-val"/></svg><b class="mono">–</b><span>Memory</span></div>
+            <div class="gauge" data-g="disk"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" class="g-track"/><circle cx="32" cy="32" r="27" class="g-val"/></svg><b class="mono">–</b><span>Disk</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Live Pulse</h3><span class="live"><span class="live-dot"></span>Live · last 5 min</span></div>
+          <div class="pulse-grid">
+            <div class="metric" data-m="cpu"><div class="m-top"><span>CPU</span><b class="mono"></b></div><svg class="sparkline" preserveAspectRatio="none"></svg><div class="m-foot mono"></div></div>
+            <div class="metric" data-m="mem"><div class="m-top"><span>Memory</span><b class="mono"></b></div><svg class="sparkline" preserveAspectRatio="none"></svg><div class="m-foot mono"></div></div>
+            <div class="metric" data-m="disk"><div class="m-top"><span>Disk</span><b class="mono"></b></div><svg class="sparkline" preserveAspectRatio="none"></svg><div class="m-foot mono"></div></div>
+            <div class="metric" data-m="net"><div class="m-top"><span>Network</span><b class="mono"></b></div><svg class="sparkline" preserveAspectRatio="none"></svg><div class="m-foot mono"></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Quick access</h3><button id="linkAdd" class="btn sm">+ Add shortcut</button></div>
+          <form id="linkForm" class="link-form" hidden>
+            <input id="linkLabel" placeholder="Label" maxlength="40">
+            <input id="linkUrl" placeholder="https://…" required>
+            <button class="btn primary sm" type="submit">Save</button>
+            <button class="btn sm" type="button" id="linkCancel">Cancel</button>
+          </form>
+          <div id="links" class="links"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Processes</h3><span id="procCount" class="muted small"></span></div>
+          <div class="table-wrap"><table class="procs"><thead><tr><th>Name</th><th>Status</th><th class="r">CPU</th><th class="r">Memory</th><th class="r">Restarts</th><th class="r">Uptime</th><th></th></tr></thead><tbody id="procs"></tbody></table></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="viewEditor" hidden>
+      <div class="ed">
+        <aside class="ed-side" id="edSide">
+          <div class="ed-proj"><div id="edProject"></div></div>
+          <div class="ed-modes" role="tablist">
+            <button data-pane="files" class="on" title="Files">Files</button>
+            <button data-pane="search" title="Search across files (Ctrl+Shift+F)">Search</button>
+            <button data-pane="changes" title="Edits Claude made">Changes <span id="edChangeCount" class="ed-count" hidden></span></button>
+          </div>
+          <div class="ed-pane" data-pane="files">
+            <div class="ed-tools">
+              <span class="ed-tools-label" id="edRootLabel">Files</span>
+              <button id="edNewFile" title="New file"><svg viewBox="0 0 20 20" width="15" height="15"><path d="M11.5 3H6a1.5 1.5 0 0 0-1.5 1.5v11A1.5 1.5 0 0 0 6 17h8a1.5 1.5 0 0 0 1.5-1.5V7z M11.5 3v4h4M10 10v4.5M7.75 12.25h4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button id="edNewFolder" title="New folder"><svg viewBox="0 0 20 20" width="15" height="15"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h3l1.5 1.5h6.5A1.5 1.5 0 0 1 17 8v6.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 14.5zM10 9v4.5M7.75 11.25h4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button id="edRefresh" title="Refresh"><svg viewBox="0 0 20 20" width="15" height="15"><path d="M15.5 10a5.5 5.5 0 1 1-1.6-3.9M15.5 4v3h-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button id="edCollapse" title="Collapse all"><svg viewBox="0 0 20 20" width="15" height="15"><path d="M6 8l4-3.5L14 8M6 15.5l4-3.5 4 3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+            <div id="edTree" class="ed-tree" role="tree"></div>
+          </div>
+          <div class="ed-pane" data-pane="search" hidden>
+            <form id="edSearchForm" class="ed-search">
+              <div class="ed-input"><input id="edQuery" placeholder="Search in project" autocomplete="off"><button type="button" class="tog" id="edCase" title="Match case">Aa</button><button type="button" class="tog" id="edRegex" title="Regular expression">.*</button></div>
+              <div class="ed-input"><input id="edReplace" placeholder="Replace with" autocomplete="off"><button type="button" class="tog act" id="edReplaceAll" title="Replace in all matched files">Replace all</button></div>
+              <input id="edInclude" class="ed-include" placeholder="Files to include, e.g. *.ts, *.css" autocomplete="off">
+            </form>
+            <div id="edSearchInfo" class="ed-info"></div>
+            <div id="edResults" class="ed-results"></div>
+          </div>
+          <div class="ed-pane" data-pane="changes" hidden>
+            <div class="ed-info">Every file Claude edits is recorded here with its before/after, so you can review or revert it.</div>
+            <div id="edChanges" class="ed-changes"></div>
+          </div>
+        </aside>
+        <div class="ed-main">
+          <div class="ed-tabbar">
+            <button id="edSideToggle" class="ed-side-toggle" title="Files"><svg viewBox="0 0 20 20" width="17" height="17"><rect x="3" y="4" width="14" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 4v12" stroke="currentColor" stroke-width="1.5"/></svg></button>
+            <div id="edTabs" class="ed-tabs" role="tablist"></div>
+            <div class="ed-actions">
+              <button id="edRO" class="ed-act" title="Read-only mode"><svg viewBox="0 0 20 20" width="15" height="15"><rect x="4.5" y="9" width="11" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Editing</span></button>
+              <button id="edReload" class="ed-act" title="Reload from disk"><svg viewBox="0 0 20 20" width="15" height="15"><path d="M15.5 10a5.5 5.5 0 1 1-1.6-3.9M15.5 4v3h-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button id="edSave" class="btn primary sm" title="Save (Ctrl+S)">Save</button>
+            </div>
+          </div>
+          <div id="edBanner" class="ed-banner" hidden></div>
+          <div class="ed-stage">
+            <div id="edMonaco" class="ed-monaco"></div>
+            <div id="edDiff" class="ed-monaco" hidden></div>
+            <div id="edEmpty" class="ed-empty">
+              <h2>No file open</h2>
+              <p>Pick a project above and open a file from the tree. <kbd>Ctrl</kbd> <kbd>S</kbd> saves, <kbd>Ctrl</kbd> <kbd>F</kbd> finds, <kbd>Ctrl</kbd> <kbd>H</kbd> replaces, <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>F</kbd> searches the project.</p>
+            </div>
+          </div>
+          <div class="ed-status">
+            <span id="edStPath" class="mono"></span>
+            <span class="sp"></span>
+            <span id="edStState"></span>
+            <span id="edStPos" class="mono"></span>
+            <span id="edStLang"></span>
+          </div>
+        </div>
+      </div>
+      <div id="edMenu" class="pop ctx" hidden></div>
+    </section>
+
+    <section id="viewSites" hidden>
+      <div class="mon">
+        <div class="card summary">
+          <div>
+            <p class="eyebrow">Sites &amp; backups</p>
+            <h1 id="sitesHeadline">Loading sites…</h1>
+            <p id="sitesSub" class="muted">Snapshots save code, data, config and database dumps. Full backups also include dependencies, build output and TLS certificates.</p>
+            <div id="sitesStats" class="stats"></div>
+          </div>
+          <div class="summary-actions">
+            <button id="snapAll" class="btn primary">Snapshot all sites</button>
+          </div>
+        </div>
+        <div id="siteCards" class="site-cards"></div>
+      </div>
+    </section>
+
+    <section id="viewSkills" hidden>
+      <div class="mon" id="skillsRoot">
+        <div class="card summary">
+          <div>
+            <p class="eyebrow">Skills</p>
+            <h1 id="skillsHeadline">Loading skills…</h1>
+            <p class="muted">Skills teach Claude a workflow, like making Word files or testing a web app. Claude reads a skill when a task matches its description. Changes apply to new chats.</p>
+            <div id="skillsStats" class="stats"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Add from GitHub</h3></div>
+          <form id="skForm" class="sk-form">
+            <input id="skUrl" placeholder="github.com/owner/repo, or a link to a skill folder" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="url">
+            <button id="skFind" class="btn primary" type="submit">Find skills</button>
+          </form>
+          <p id="skExamples" class="sk-examples">Try <button type="button" class="linkish" data-url="https://github.com/anthropics/skills">anthropics/skills</button>, Anthropic's official skills.</p>
+          <p id="skErr" class="sk-err" hidden></p>
+          <div id="skResults"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Installed</h3><span class="muted small mono">~/.claude/skills</span></div>
+          <div id="skInstalled"></div>
+        </div>
+        <div class="card" id="skSyncedCard" hidden>
+          <div class="card-head"><h3>From claude.ai <span class="muted small sk-sub">synced, read-only</span></h3><button type="button" id="skSyncedToggle" class="btn sm">Show</button></div>
+          <div id="skSynced"></div>
+        </div>
+      </div>
+    </section>
+    <section id="viewSettings" hidden>
+      <div class="set" id="settingsRoot">
+        <div class="set-label">Notifications</div>
+        <div id="setNotif" class="set-notif"></div>
+        <div class="set-label">Appearance</div>
+        <div class="set-group">
+          <div class="set-row"><div class="set-txt"><b>Theme</b></div>
+            <div class="seg" id="setTheme" role="radiogroup" aria-label="Theme">
+              <button type="button" data-t="system" role="radio">Auto</button><button type="button" data-t="light" role="radio">Light</button><button type="button" data-t="dark" role="radio">Dark</button>
+            </div>
+          </div>
+        </div>
+        <p class="set-note">Auto follows your device's light or dark setting.</p>
+        <div class="set-label">Updates</div>
+        <div class="set-group">
+          <div class="set-row"><div class="set-txt"><b id="setUpdTitle">Checking for updates…</b><small id="setUpdSub">Orbit updates on the server. Reload to get the newest version.</small></div></div>
+          <button type="button" class="set-row set-btn" id="setReload"><span>Reload Orbit</span></button>
+          <button type="button" class="set-row set-btn" id="setCheck"><span>Check now</span></button>
+        </div>
+        <p class="set-note" id="setPtrNote" hidden>In the Home Screen app you can also pull down on any page to reload.</p>
+        <div class="set-label" id="setAppLabel" hidden>iPhone app</div>
+        <div class="set-group" id="setAppGroup" hidden>
+          <button type="button" class="set-row set-btn" id="setInstall"><div class="set-txt"><b>Add Orbit to your Home Screen</b><small>Full screen, its own icon, and notifications</small></div><span class="set-chev">›</span></button>
+        </div>
+        <div id="setNotifMore"></div>
+        <div class="set-label">Account</div>
+        <div class="set-group">
+          <a class="set-row set-btn set-danger" href="/claude/logout"><span>Log out</span></a>
+        </div>
+        <p class="set-note">Logging out ends this device's session. Chats that are running keep going on the server.</p>
+      </div>
+    </section>
+    <div id="viewChat">
+
+    <div id="quickbar">
+      <div id="quick" class="chips" aria-label="Quick commands"></div>
+      <button id="quickEdit" class="chip-edit" aria-label="Edit quick commands" title="Add, edit or reorder quick commands">Edit</button>
+    </div>
+
+    <div id="scroll">
+      <div id="thread">
+        <div id="empty">
+          <h1>New chat</h1>
+          <p>Claude works in <code>/root</code> on this server. It asks before running commands or editing files unless you change the mode below.</p>
+        </div>
+        <div id="messages"></div>
+        <div id="working" hidden><span class="spark"></span> <span id="workingText">Working…</span></div>
+      </div>
+    </div>
+
+    <footer id="composerWrap">
+      <div id="tasksBar" hidden>
+        <div id="tasksPanel" hidden></div>
+        <button type="button" id="tasksStrip"></button>
+      </div>
+      <form id="composer">
+        <div id="tray" hidden></div>
+        <textarea id="input" rows="1" placeholder="Message Orbit…" autocomplete="off"></textarea>
+        <div class="composer-row">
+          <button type="button" id="attachBtn" class="attach" aria-label="Attach images or files" title="Attach images or files (or paste / drop them)">
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M14.5 9.5l-5.3 5.3a3.2 3.2 0 0 1-4.5-4.5l5.8-5.8a2.1 2.1 0 0 1 3 3l-5.6 5.6a1 1 0 0 1-1.5-1.5l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <input type="file" id="fileInput" multiple hidden>
+          <input type="file" id="imageInput" accept="image/*" multiple hidden>
+          <input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
+          <div id="attachMenu" class="pop" role="menu" hidden>
+            <div class="pop-title">Add to message</div>
+            <button type="button" class="pop-item" data-pick="image" role="menuitem">
+              <span class="pop-ico blue"><svg viewBox="0 0 20 20" width="18" height="18"><rect x="3" y="3.5" width="14" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7.5" cy="8" r="1.5" fill="currentColor"/><path d="M3.5 14l4-4 3 3 2-2 4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+              <span class="pop-txt"><b>Photos &amp; images</b><small>Claude sees them directly</small></span>
+            </button>
+            <button type="button" class="pop-item" data-pick="camera" role="menuitem" hidden>
+              <span class="pop-ico green"><svg viewBox="0 0 20 20" width="18" height="18"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h2l1.2-2h4.6l1.2 2h2A1.5 1.5 0 0 1 17 7.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 14.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10" cy="11" r="2.8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>
+              <span class="pop-txt"><b>Take a photo</b><small>Use your camera</small></span>
+            </button>
+            <button type="button" class="pop-item" data-pick="file" role="menuitem">
+              <span class="pop-ico orange"><svg viewBox="0 0 20 20" width="18" height="18"><path d="M11.5 3H6a1.5 1.5 0 0 0-1.5 1.5v11A1.5 1.5 0 0 0 6 17h8a1.5 1.5 0 0 0 1.5-1.5V7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M11.5 3v4h4M7.5 11h5M7.5 13.8h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="pop-txt"><b>Files</b><small>PDF, code, logs, archives · up to 100 MB</small></span>
+            </button>
+            <button type="button" class="pop-item" data-pick="paste" role="menuitem" hidden>
+              <span class="pop-ico gray"><svg viewBox="0 0 20 20" width="18" height="18"><rect x="5" y="4" width="10" height="13" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 4V3.2c0-.4.3-.7.7-.7h2.6c.4 0 .7.3.7.7V4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 9.5h4M8 12.5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+              <span class="pop-txt"><b>Paste from clipboard</b><small>A screenshot you just copied</small></span>
+            </button>
+            <div class="pop-foot">Tip: you can also drag files here or press <kbd>Ctrl</kbd> <kbd>V</kbd></div>
+          </div>
+          <div id="modelPick" class="mp-pick">
+            <button type="button" id="modelBtn" class="model-btn" aria-haspopup="listbox" aria-expanded="false" title="Choose the AI model"><span id="modelName">Claude</span><svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true"><path d="M6 8l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div id="modelMenu" class="pop model-menu" role="listbox" hidden></div>
+          </div>
+          <span id="modelHint" class="model-hint" hidden>Chat only · no tools</span>
+          <div id="modes" role="radiogroup" aria-label="Permission mode">
+            <button type="button" data-mode="default" title="Claude asks before running commands or editing files">Ask first</button>
+            <button type="button" data-mode="acceptEdits" title="File edits are applied automatically, commands still ask">Auto-edit</button>
+            <button type="button" data-mode="plan" title="Read-only: Claude researches and proposes a plan">Plan</button>
+            <button type="button" data-mode="auto" title="A safety classifier approves routine actions and asks about risky ones">Auto</button>
+          </div>
+          <button type="button" id="autoApprove" class="auto-approve" aria-pressed="false" title="Auto-approve: run every command and edit automatically, without asking. Use with care.">
+            <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true"><path d="M10.5 2.5 4 11h4l-1.5 6.5L14 9h-4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            <span>Auto-approve</span>
+          </button>
+          <button id="sendBtn" type="submit" class="send" aria-label="Send">
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 16V4M5 9l5-5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button id="stopBtn" type="button" class="send stop" aria-label="Stop" hidden>
+            <svg viewBox="0 0 20 20" width="14" height="14"><rect x="4" y="4" width="12" height="12" rx="2" fill="currentColor"/></svg>
+          </button>
+        </div>
+      </form>
+    </footer>
+    </div>
+  </main>
+</div>
+
+<div id="dropzone" hidden><div><svg viewBox="0 0 20 20" width="34" height="34"><path d="M10 13V3M6 7l4-4 4 4M4 13v2a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Drop to attach</b><span>Images Claude will see · any other file gets uploaded to the server</span></div></div>
+
+<div id="qm" class="sheet" hidden>
+  <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="qmTitle">
+    <div class="sheet-head">
+      <h2 id="qmTitle">Quick commands</h2>
+      <button id="qmClose" class="icon-btn show" aria-label="Close">
+        <svg viewBox="0 0 20 20" width="18" height="18"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <p class="sheet-hint">Drag <span class="grip-inline">⋮⋮</span> to reorder. Tap a command to edit it.</p>
+    <ul id="qmList"></ul>
+    <form id="qmForm">
+      <div class="qm-form-title" id="qmFormTitle">Add a command</div>
+      <input id="qmLabel" maxlength="40" placeholder="Label (e.g. Deploy dineo)">
+      <textarea id="qmPrompt" rows="3" maxlength="4000" placeholder="What to send to Claude — a request, or a slash command like /compact" required></textarea>
+      <label class="qm-check"><input type="checkbox" id="qmSend" checked> Send right away <span>(off = put it in the message box to edit first)</span></label>
+      <div class="qm-actions">
+        <button type="button" id="qmCancel" class="btn" hidden>Cancel</button>
+        <button type="submit" id="qmSubmit" class="btn primary">Add command</button>
+      </div>
+    </form>
+    <div class="sheet-foot"><button type="button" id="qmReset" class="linkish">Reset to defaults</button></div>
+  </div>
+</div>
+<script src="/claude/marked.js"></script>
+<script src="/claude/purify.js"></script>
+<div id="logs" class="sheet" hidden>
+  <div class="sheet-card wide" role="dialog" aria-modal="true" aria-labelledby="logsTitle">
+    <div class="sheet-head">
+      <h2 id="logsTitle">Logs</h2>
+      <div class="sheet-tools">
+        <button id="logsRefresh" class="btn sm">Refresh</button>
+        <button id="logsAsk" class="btn primary sm">Ask Claude</button>
+        <button id="logsClose" class="icon-btn show" aria-label="Close"><svg viewBox="0 0 20 20" width="18" height="18"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+      </div>
+    </div>
+    <div class="log-tabs"><button data-t="err" class="on">Errors</button><button data-t="out">Output</button></div>
+    <pre id="logsBody" class="logs-body"></pre>
+  </div>
+</div>
+<script src="/claude/chat.js"></script>
+<script src="/claude/monitor.js"></script>
+<script src="/claude/sites.js"></script>
+<script src="/claude/skills-ui.js"></script>
+<script src="/claude/pwa-ui.js"></script>
+<script src="/claude/vs/loader.js"></script>
+<script src="/claude/editor.js"></script>
+<script src="/claude/usage-widget.js"></script>
+<script src="/claude/models.js"></script>
+</body>
+</html>

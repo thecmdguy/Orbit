@@ -1,0 +1,108 @@
+# Orbit nginx site — reverse-proxies the main server and the five side services,
+# and enforces the login on the side services via auth_request.
+#
+# Before using:
+#   1. Replace  orbit.example.com     with your domain.
+#   2. Replace  /path/to/orbit        with the absolute path to this repo.
+#   3. Make ORBIT_ORIGINS in your .env match the https origin below.
+#   4. Get a TLS cert (see INSTALL.md — certbot) and point ssl_certificate at it.
+#   5. Ports below (3020–3025) must match your .env.
+#
+# The app is mounted under /claude. To change that, also set ORBIT_BASE and adjust
+# every "/claude" path here to match.
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name orbit.example.com;
+
+    # --- TLS (certbot fills these in; or point them at your own cert) ---
+    ssl_certificate     /etc/letsencrypt/live/orbit.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/orbit.example.com/privkey.pem;
+
+    # large uploads (attachments up to 100 MB)
+    client_max_body_size 110m;
+
+    # Redirect the bare path to the app.
+    location = /claude { return 301 /claude/; }
+
+    # ---- Login check used by the side services (internal subrequest) ----
+    location = /claude/__authcheck {
+        internal;
+        proxy_pass http://127.0.0.1:3020/claude/api/quick;
+        proxy_method GET;
+        proxy_pass_request_body off;
+        proxy_set_header Content-Length "";
+        proxy_set_header Host $host;
+    }
+
+    # ---- Side services (each behind the login) ----
+    location = /claude/api/usage {
+        auth_request /claude/__authcheck;
+        proxy_pass http://127.0.0.1:3021;
+        proxy_set_header Host $host;
+    }
+    location = /claude/api/explain {
+        auth_request /claude/__authcheck;
+        proxy_pass http://127.0.0.1:3025;
+        proxy_set_header Host $host;
+        proxy_set_header Origin $http_origin;
+        proxy_read_timeout 30s;
+    }
+    location ^~ /claude/api/models/ {
+        auth_request /claude/__authcheck;
+        proxy_pass http://127.0.0.1:3022;
+        proxy_set_header Host $host;
+        proxy_set_header Origin $http_origin;
+        proxy_http_version 1.1;
+        proxy_read_timeout 900s;
+        client_max_body_size 60m;
+    }
+    location ^~ /claude/api/skills/ {
+        auth_request /claude/__authcheck;
+        proxy_pass http://127.0.0.1:3023;
+        proxy_set_header Host $host;
+        proxy_set_header Origin $http_origin;
+        proxy_read_timeout 180s;
+    }
+    location ^~ /claude/api/push/ {
+        auth_request /claude/__authcheck;
+        proxy_pass http://127.0.0.1:3024;
+        proxy_set_header Host $host;
+        proxy_set_header Origin $http_origin;
+    }
+    location ^~ /claude/api/chats/ {
+        auth_request /claude/__authcheck;
+        proxy_pass http://127.0.0.1:3024;
+        proxy_set_header Host $host;
+        proxy_set_header Origin $http_origin;
+        proxy_read_timeout 30s;
+    }
+
+    # ---- PWA assets (public; iOS fetches these without cookies) ----
+    location = /claude/manifest.webmanifest { alias /path/to/orbit/public/pwa/manifest.webmanifest; default_type application/manifest+json; }
+    location = /claude/sw.js { alias /path/to/orbit/public/pwa/sw.js; default_type application/javascript; add_header Service-Worker-Allowed "/claude/" always; }
+    location ^~ /claude/pwa/ { alias /path/to/orbit/public/pwa/; add_header Cache-Control "public, max-age=86400" always; }
+
+    # ---- Everything else -> the main Orbit server (with WebSocket upgrade) ----
+    location ^~ /claude/ {
+        proxy_pass http://127.0.0.1:3020;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Origin $http_origin;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_read_timeout 86400s;
+    }
+}
+
+# Redirect HTTP -> HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+    server_name orbit.example.com;
+    return 301 https://$host$request_uri;
+}

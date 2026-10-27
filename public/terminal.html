@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
+<meta name="robots" content="noindex">
+<title>Orbit · Terminal</title>
+<link rel="stylesheet" href="/claude/xterm.css">
+<style>
+  :root { color-scheme: dark; --bg: #141413; --bar: #1f1e1c; --line: #3a3935; --fg: #e8e6dc; --accent: #ffffff; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
+               font: 13px ui-sans-serif, system-ui, -apple-system, sans-serif; }
+  body { display: flex; flex-direction: column; height: 100dvh; }
+  header { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--bar); border-bottom: 1px solid var(--line); }
+  header b { font-weight: 600; } header b span { color: var(--accent); font-family: ui-monospace, monospace; }
+  #status { color: #9a978c; font-size: 12px; } #status.on::before { content: '● '; color: #7cb87c; } #status.off::before { content: '● '; color: #e5776a; }
+  header .sp { flex: 1; }
+  header a, header button { color: #9a978c; background: none; border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; font: inherit; cursor: pointer; text-decoration: none; }
+  header a:hover, header button:hover { color: var(--fg); }
+  #term { flex: 1; min-height: 0; padding: 6px 0 0 8px; }
+  #keys { display: flex; gap: 6px; padding: 6px 8px; overflow-x: auto; background: var(--bar); border-top: 1px solid var(--line); }
+  #keys button { flex: none; min-width: 44px; padding: 8px 10px; background: #2a2926; color: var(--fg); border: 1px solid var(--line);
+                 border-radius: 6px; font: 13px ui-monospace, monospace; }
+  #keys button:active { background: var(--accent); color: var(--bg); }
+  @media (hover: hover) and (pointer: fine) { #keys { display: none; } }
+</style>
+</head>
+<body>
+<header>
+  <b><img src="/claude/logo-mark.png?v=orbit3" alt="" style="width:18px;height:18px;vertical-align:-4px;margin-right:6px">Orbit</b>
+  <span id="status">connecting…</span>
+  <span class="sp"></span>
+  <button id="restart" title="Kill the session and start a fresh claude">Restart</button>
+  <a href="/claude/">Chat</a>
+  <a href="/claude/logout">Log out</a>
+</header>
+<div id="term"></div>
+<div id="keys">
+  <button data-k="\x1b">Esc</button>
+  <button data-k="\t">Tab</button>
+  <button data-k="\x1b[Z">⇧Tab</button>
+  <button data-k="\x03">^C</button>
+  <button data-k="\x1b[A">↑</button>
+  <button data-k="\x1b[B">↓</button>
+  <button data-k="\x1b[D">←</button>
+  <button data-k="\x1b[C">→</button>
+  <button data-k="\r">⏎</button>
+  <button data-k="/">/</button>
+  <button data-k="\x1b\r">⌥⏎</button>
+</div>
+<script src="/claude/xterm.js"></script>
+<script src="/claude/addon-fit.js"></script>
+<script src="/claude/addon-web-links.js"></script>
+<script src="/claude/app.js"></script>
+</body>
+</html>

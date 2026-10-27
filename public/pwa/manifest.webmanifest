@@ -1,0 +1,22 @@
+{
+  "name": "Orbit",
+  "short_name": "Orbit",
+  "description": "Claude Code on your server",
+  "id": "/claude/",
+  "start_url": "/claude/?source=homescreen",
+  "scope": "/claude/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    { "src": "/claude/pwa/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/claude/pwa/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/claude/pwa/icon-1024.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any" },
+    { "src": "/claude/pwa/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "New chat", "url": "/claude/#/", "icons": [{ "src": "/claude/pwa/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Monitor", "url": "/claude/#/monitor", "icons": [{ "src": "/claude/pwa/icon-192.png", "sizes": "192x192" }] }
+  ]
+}
