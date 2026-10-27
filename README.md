@@ -16,8 +16,8 @@
 
 <p align="center">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-111111">
-  <img alt="Node >= 18.17" src="https://img.shields.io/badge/node-%E2%89%A518.17-111111">
-  <img alt="Build: none" src="https://img.shields.io/badge/build_step-none-111111">
+  <img alt="Node 18.17+" src="https://img.shields.io/badge/node-%E2%89%A518.17-111111">
+  <img alt="Build step: none" src="https://img.shields.io/badge/build_step-none-111111">
   <img alt="Self-hosted" src="https://img.shields.io/badge/self--hosted-yes-111111">
 </p>
 
