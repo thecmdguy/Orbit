@@ -1,12 +1,47 @@
-# Orbit
+<p align="center">
+  <img src="docs/images/cover.png" alt="Orbit — your server, run by Claude, from any browser" width="100%">
+</p>
 
-**A self-hosted web client for [Claude Code](https://docs.anthropic.com/en/docs/claude-code).**
-Run Claude Code from any browser — your phone, laptop, or a VPS — with a clean chat UI,
-tool-approval prompts, a live server monitor, a file editor, site backups, skills, and
-iOS push notifications. Orbit drives the Claude Code CLI on your machine and shares its
-login, so your work runs where your code and credentials already are.
+<h1 align="center">Orbit</h1>
+
+<p align="center">
+  A self-hosted web client for <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a> —
+  chat with tool approvals, a live server monitor, a file editor, site backups, skills, and iOS push.
+  <br>One tab, on your laptop, phone, or VPS.
+</p>
+
+<p align="center">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-111111">
+  <img alt="Node >= 18.17" src="https://img.shields.io/badge/node-%E2%89%A518.17-111111">
+  <img alt="Build: none" src="https://img.shields.io/badge/build_step-none-111111">
+  <img alt="Self-hosted" src="https://img.shields.io/badge/self--hosted-yes-111111">
+</p>
 
 > Orbit is a community project. It is not affiliated with or endorsed by Anthropic.
+
+---
+
+## Screenshots
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/images/chat.jpg" alt="Chat"><br><sub><b>Chat</b> — streamed replies, quick commands, step-by-step tool runs</sub></td>
+    <td width="50%"><img src="docs/images/approval.jpg" alt="Tool approval"><br><sub><b>Approvals</b> — Allow / Always allow / Deny, with plain-language Explain</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/monitor.jpg" alt="Monitor"><br><sub><b>Monitor</b> — live CPU / memory / disk, pm2 processes, site checks</sub></td>
+    <td><img src="docs/images/editor.jpg" alt="Editor"><br><sub><b>Editor</b> — Monaco with a diff of every change Claude makes</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/sites.jpg" alt="Sites & backups"><br><sub><b>Sites &amp; backups</b> — snapshot or full backups per site</sub></td>
+    <td><img src="docs/images/dark.jpg" alt="Dark mode"><br><sub><b>Dark mode</b> — monochrome, color only when it means something</sub></td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="docs/images/mobile.jpg" alt="Orbit on iPhone" width="300"><br>
+  <sub><b>Installable iOS app</b> — add to Home Screen, with live Web Push notifications</sub>
+</p>
 
 ---
 
