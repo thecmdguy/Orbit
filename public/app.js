@@ -19,7 +19,7 @@ function ctl(msg) { if (ws && ws.readyState === 1) ws.send('\x00' + JSON.stringi
 function sendResize() { fit.fit(); ctl({ type: 'resize', cols: term.cols, rows: term.rows }); }
 
 function connect() {
-  ws = new WebSocket(`wss://${location.host}/claude/ws`);
+  ws = new WebSocket(`wss://${location.host}/orbit/ws`);
   ws.onopen = () => { retry = 0; status.textContent = 'connected'; status.className = 'on'; sendResize(); term.focus(); };
   ws.onmessage = (e) => term.write(e.data);
   ws.onclose = (e) => {

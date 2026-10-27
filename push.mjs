@@ -1,10 +1,10 @@
 // Orbit push service (pm2 orbit-push, 127.0.0.1:3024).
 // Web Push (VAPID) to the Orbit Home Screen app / browsers, fed by:
 //  - Orbit chats: logs in to Orbit locally and attaches to busy chats over the chat socket, like a browser tab,
-//    so it sees approval requests and "finished" without changing or restarting claude-web.
+//    so it sees approval requests and "finished" without changing or restarting the main server.
 //    It detaches as soon as a chat goes idle, so Orbit's 20-minute idle close still works.
 //  - Server alerts: its own light checks (sites every 60s, pm2 every 60s, disk every 5 min).
-// nginx puts /claude/api/push/ behind the Orbit login; writes also need an allowed Origin (ORBIT_ORIGINS).
+// nginx puts /orbit/api/push/ behind the Orbit login; writes also need an allowed Origin (ORBIT_ORIGINS).
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -222,7 +222,7 @@ setInterval(checkDisk, 5 * 60e3);
 setTimeout(checkDisk, 10000);
 
 
-// ---------- sidebar actions: stop / delete / restore a chat (POST /claude/api/chats/*) ----------
+// ---------- sidebar actions: stop / delete / restore a chat (POST /orbit/api/chats/*) ----------
 const PROJECT_DIR = cfg.projectDirFor();
 const CHAT_TRASH = path.join(cfg.TRASH, 'sessions');
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
@@ -308,7 +308,7 @@ const pub = (s) => ({ id: s.id, device: s.device, prefs: { ...DEFAULT_PREFS, ...
 
 http.createServer(async (req, res) => {
   const u = new URL(req.url, 'http://x');
-  const route = u.pathname.replace(/^\/claude\/api\/push\/?/, '/');
+  const route = u.pathname.replace(/^\/orbit\/api\/push\/?/, '/');
   try {
     if (req.method !== 'GET' && !cfg.originOk(req.headers.origin || '')) return json(res, 403, { error: 'Bad origin' });
     if (u.pathname.startsWith(B + '/api/chats/')) {

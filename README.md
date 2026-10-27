@@ -117,7 +117,7 @@ npm run setup            # or: node bin/orbit-setup.mjs "your password"
 npm start                # runs all six services (Ctrl-C to stop)
 ```
 
-Open **http://localhost:3020/claude/** and log in.
+Open **http://localhost:3020/orbit/** and log in.
 
 That gives you chat, monitor, editor, sites, and terminal immediately. The usage widget,
 multi-model, skills, push, and the fast "explain" endpoint are reachable in the browser only

@@ -1,7 +1,7 @@
 // Orbit as a Home Screen app: service worker, Web Push subscribe/settings, install guide, presence, app badge.
-// Backend: orbit-push (push.mjs, :3024) at /claude/api/push/.
+// Backend: orbit-push (push.mjs, :3024) at /orbit/api/push/.
 (() => {
-  const API = '/claude/api/push/';
+  const API = '/orbit/api/push/';
   const $ = (s, el = document) => el.querySelector(s);
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const toast = (t) => window.App?.toast(t);
@@ -16,7 +16,7 @@
   let reg = null;
   const ready = (async () => {
     if (!('serviceWorker' in navigator)) return null;
-    try { reg = await navigator.serviceWorker.register('/claude/sw.js', { scope: '/claude/' }); await navigator.serviceWorker.ready; return reg; }
+    try { reg = await navigator.serviceWorker.register('/orbit/sw.js', { scope: '/orbit/' }); await navigator.serviceWorker.ready; return reg; }
     catch (e) { console.warn('sw', e); return null; }
   })();
   navigator.serviceWorker?.addEventListener('message', (e) => {
@@ -195,7 +195,7 @@
     card.append(head('Get the Orbit app'));
     const body = el('div', 'nf-body');
     const hero = el('div', 'nf-hero');
-    const icon = el('img'); icon.src = '/claude/pwa/icon-180.png'; icon.alt = ''; icon.width = 64; icon.height = 64;
+    const icon = el('img'); icon.src = '/orbit/pwa/icon-180.png'; icon.alt = ''; icon.width = 64; icon.height = 64;
     const ht = el('div'); ht.append(el('b', '', 'Orbit for iPhone'), el('small', '', 'Full screen, its own icon, and notifications when Claude needs you.'));
     hero.append(icon, ht);
     body.append(hero);
@@ -260,7 +260,7 @@
   function reload() {
     try { const t = $('#input'); if (t?.value) sessionStorage.setItem(DRAFT, JSON.stringify({ v: t.value, h: location.hash, at: Date.now() })); } catch {}
     document.documentElement.classList.add('reloading');
-    navigator.serviceWorker?.getRegistration('/claude/').then((r) => r?.update()).catch(() => {});
+    navigator.serviceWorker?.getRegistration('/orbit/').then((r) => r?.update()).catch(() => {});
     setTimeout(() => location.reload(), 60);
   }
   window.OrbitReload = reload;
@@ -331,7 +331,7 @@
   }
 
   // ---- "Orbit was updated" pill: compare a fingerprint of the app's files when it comes back to the foreground ----
-  const FILES = ['/claude/', '/claude/chat.js', '/claude/chat.css', '/claude/pwa-ui.js', '/claude/monitor.js', '/claude/sites.js', '/claude/skills-ui.js', '/claude/editor.js', '/claude/usage-widget.js'];
+  const FILES = ['/orbit/', '/orbit/chat.js', '/orbit/chat.css', '/orbit/pwa-ui.js', '/orbit/monitor.js', '/orbit/sites.js', '/orbit/skills-ui.js', '/orbit/editor.js', '/orbit/usage-widget.js'];
   const hash = (s) => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0).toString(36); };
   async function fingerprint() {
     const parts = await Promise.all(FILES.map((u) => fetch(u, { cache: 'no-store', credentials: 'same-origin' })

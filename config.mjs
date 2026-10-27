@@ -30,8 +30,8 @@ const HOME = env.HOME || os.homedir();
 const num = (v, d) => (v !== undefined && v !== '' ? parseInt(v, 10) : d);
 
 // Where the app is mounted (the URL path prefix). Served directly at this prefix,
-// and reverse-proxied under the same prefix by nginx. The frontend expects /claude.
-export const BASE = env.ORBIT_BASE ?? '/claude';
+// and reverse-proxied under the same prefix by nginx. The frontend expects /orbit.
+export const BASE = env.ORBIT_BASE ?? '/orbit';
 
 // Loopback host the services bind to (nginx talks to them here).
 export const HOST = env.ORBIT_HOST || '127.0.0.1';

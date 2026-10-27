@@ -1,4 +1,4 @@
-// Chat UI for Orbit. Talks to /claude/chat-ws; renders Agent SDK messages
+// Chat UI for Orbit. Talks to /orbit/chat-ws; renders Agent SDK messages
 // (live) and transcript messages (history) through the same block renderer.
 const $ = (s, el = document) => el.querySelector(s);
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
@@ -338,7 +338,7 @@ const explained = new Map(); // key -> Promise<result>
 function fetchExplain(tool, input) {
   const key = tool + JSON.stringify(input).slice(0, 2000);
   if (!explained.has(key)) {
-    explained.set(key, fetch('/claude/api/explain', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tool, input, request: lastUserText }) })
+    explained.set(key, fetch('/orbit/api/explain', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tool, input, request: lastUserText }) })
       .then(async (r) => { const j = await r.json(); if (!r.ok) throw new Error(j.error || 'Could not explain'); return j; })
       .catch((e) => { explained.delete(key); throw e; }));
   }
@@ -629,7 +629,7 @@ function ago(t) {
 let sessionsList = [];
 async function refreshSessions() {
   try {
-    const r = await fetch('/claude/api/sessions', { cache: 'no-store' });
+    const r = await fetch('/orbit/api/sessions', { cache: 'no-store' });
     if (r.status === 404) return location.reload();
     sessionsList = await r.json();
   } catch { return; }
@@ -676,7 +676,7 @@ function openSession(id) {
 }
 
 function connect() {
-  ws = new WebSocket(`wss://${location.host}/claude/chat-ws`);
+  ws = new WebSocket(`wss://${location.host}/orbit/chat-ws`);
   ws.onopen = () => {
     retry = 0;
     $('#conn').className = 'conn on';
@@ -714,7 +714,7 @@ function connect() {
   ws.onclose = () => {
     $('#conn').className = 'conn off';
     setTimeout(connect, Math.min(1000 * 2 ** retry++, 10000));
-    if (retry > 4) fetch('/claude/api/sessions').then((r) => r.status === 404 && location.reload()).catch(() => {});
+    if (retry > 4) fetch('/orbit/api/sessions').then((r) => r.status === 404 && location.reload()).catch(() => {});
   };
 }
 
@@ -834,7 +834,7 @@ function upload(att, file) {
   return new Promise((resolve) => {
     const xhr = new XMLHttpRequest();
     att.xhr = xhr;
-    xhr.open('POST', '/claude/api/upload');
+    xhr.open('POST', '/orbit/api/upload');
     xhr.setRequestHeader('X-File-Name', encodeURIComponent(file.name || 'file'));
     xhr.upload.onprogress = (e) => { if (e.lengthComputable) { att.progress = e.loaded / e.total; updateTrayItem(att); } };
     xhr.onload = () => {
@@ -1000,13 +1000,13 @@ let quick = [];
 const chipsEl = $('#quick');
 
 async function loadQuick() {
-  try { quick = await (await fetch('/claude/api/quick', { cache: 'no-store' })).json(); } catch { quick = []; }
+  try { quick = await (await fetch('/orbit/api/quick', { cache: 'no-store' })).json(); } catch { quick = []; }
   renderChips();
 }
 
 async function saveQuick(method = 'PUT') {
   try {
-    const r = await fetch('/claude/api/quick', { method, headers: { 'Content-Type': 'application/json' }, body: method === 'PUT' ? JSON.stringify(quick) : undefined });
+    const r = await fetch('/orbit/api/quick', { method, headers: { 'Content-Type': 'application/json' }, body: method === 'PUT' ? JSON.stringify(quick) : undefined });
     if (r.ok) quick = await r.json();
   } catch {}
   renderChips();
@@ -1381,7 +1381,7 @@ window.Tasks = (() => {
 
   async function loadOutput(t) {
     try {
-      const r = await fetch('/claude/api/fs/read?path=' + encodeURIComponent(t.outputFile), { cache: 'no-store' }).then((r) => r.json());
+      const r = await fetch('/orbit/api/fs/read?path=' + encodeURIComponent(t.outputFile), { cache: 'no-store' }).then((r) => r.json());
       const pre = document.getElementById('tkOut');
       if (!pre || expanded !== t.id) return;
       let txt = r.tooLarge ? '(Output is too large to preview. Use Open output.)' : r.binary ? '(Binary output)' : (r.content || '').replace(ANSI, '').replace(/\r(?!\n)/g, '\n');
@@ -1442,7 +1442,7 @@ window.Tasks = (() => {
 })();
 
 // ---------- sidebar recents: swipe left (touch) or hover (mouse) to Stop / Delete ----------
-// Backend: orbit-push /claude/api/chats/{stop,delete,restore}; model chats use orbit-models.
+// Backend: orbit-push /orbit/api/chats/{stop,delete,restore}; model chats use orbit-models.
 (() => {
   const nav = document.getElementById('sessions');
   if (!nav) return;
@@ -1542,9 +1542,9 @@ window.Tasks = (() => {
     const id = a.dataset.id;
     const b = a.querySelector('.sw-stop'); if (b) b.disabled = true;
     try {
-      if (isModel(id)) await post('/claude/api/models/stop', { convo: id.slice(2) });
+      if (isModel(id)) await post('/orbit/api/models/stop', { convo: id.slice(2) });
       else {
-        const j = await post('/claude/api/chats/stop', { id });
+        const j = await post('/orbit/api/chats/stop', { id });
         App.toast(j.stopped || j.declined ? `Stopped “${short(titleOf(a), 40)}”` : 'That chat had already finished');
       }
     } catch (e) { App.toast(e.message); }
@@ -1563,12 +1563,12 @@ window.Tasks = (() => {
     try {
       let token = null;
       if (isModel(id)) {
-        const r = await fetch('/claude/api/models/convos/' + id.slice(2), { method: 'DELETE' });
+        const r = await fetch('/orbit/api/models/convos/' + id.slice(2), { method: 'DELETE' });
         if (!r.ok) throw new Error('Could not delete that chat');
-      } else token = (await post('/claude/api/chats/delete', { id })).token;
+      } else token = (await post('/orbit/api/chats/delete', { id })).token;
       if (wasCurrent) location.hash = '#/';
       undoToast(`Deleted “${short(title, 34)}”`, token && (async () => {
-        await post('/claude/api/chats/restore', { token });
+        await post('/orbit/api/chats/restore', { token });
         await refreshSessions();
         App.toast('Chat restored');
       }));

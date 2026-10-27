@@ -35,7 +35,7 @@ npm run setup                 # choose a login password
 npm start                     # starts all six services; Ctrl-C stops them
 ```
 
-Open **http://localhost:3020/claude/**.
+Open **http://localhost:3020/orbit/**.
 
 - Works out of the box: **chat, monitor, editor, sites, terminal**.
 - The **usage widget, multi-model, skills, push, and fast explain** endpoints are served by the
@@ -118,7 +118,7 @@ sudo ufw allow 'Nginx Full'
 sudo ufw enable
 ```
 
-Open **https://orbit.example.com/claude/** and log in.
+Open **https://orbit.example.com/orbit/** and log in.
 
 ---
 
@@ -168,7 +168,7 @@ sudo systemctl daemon-reload && sudo systemctl enable --now orbit
 - **WebSocket won't connect** — same origin issue, or your proxy isn't forwarding the `Upgrade`
   header. The nginx example already does; a CDN in front must allow WebSockets.
 - **Usage widget / skills / push missing** — those are side services; confirm all six processes
-  are up (`pm2 ls`) and that nginx has the `/claude/api/*` location blocks.
+  are up (`pm2 ls`) and that nginx has the `/orbit/api/*` location blocks.
 - **Terminal fails to start** — `node-pty` needs `build-essential` + `python3` at install time.
 - **Multi-model picker doesn't open** — the multi-model UI is experimental and ships without its
   client script; the rest of Orbit is unaffected.

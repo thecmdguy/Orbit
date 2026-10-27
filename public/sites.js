@@ -25,7 +25,7 @@
 
   async function load() {
     try {
-      const r = await fetch('/claude/api/sites', { cache: 'no-store' });
+      const r = await fetch('/orbit/api/sites', { cache: 'no-store' });
       data = await r.json();
     } catch { return; }
     if (data.jobs.current) jobs.set(data.jobs.current.site, data.jobs.current);
@@ -34,7 +34,7 @@
   }
 
   async function post(pathname, body) {
-    const r = await fetch('/claude/api/sites/' + pathname, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const r = await fetch('/orbit/api/sites/' + pathname, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok || j.ok === false) window.App.toast(j.error || 'Something went wrong');
     return j;
@@ -223,7 +223,7 @@
     const note = el('td', 'note', ar.note || (ar.seconds != null ? `took ${ar.seconds}s` : ''));
     const act = el('td'); const box = el('div', 'row-act');
     const dl = el('button', null, 'Download');
-    dl.onclick = () => { location.href = `/claude/api/sites/download?site=${encodeURIComponent(s.id)}&file=${encodeURIComponent(ar.file)}`; };
+    dl.onclick = () => { location.href = `/orbit/api/sites/download?site=${encodeURIComponent(s.id)}&file=${encodeURIComponent(ar.file)}`; };
     const restore = el('button', null, 'Restore…');
     restore.title = 'Claude walks you through restoring this archive, step by step';
     restore.onclick = () => window.App.startChat(

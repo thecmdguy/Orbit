@@ -1,4 +1,4 @@
-// Orbit: live Claude usage in the header (top right). Data: /claude/api/usage (usage.mjs via nginx).
+// Orbit: live Claude usage in the header (top right). Data: /orbit/api/usage (usage.mjs via nginx).
 (() => {
   const $ = (s) => document.querySelector(s);
   const btn = $('#usageBtn'), pop = $('#usagePop'), ring = $('#usageRing');
@@ -122,7 +122,7 @@
     if (loading) return;
     loading = true; renderPop();
     try {
-      const r = await fetch('/claude/api/usage' + (force ? '?force=1' : ''), { cache: 'no-store' });
+      const r = await fetch('/orbit/api/usage' + (force ? '?force=1' : ''), { cache: 'no-store' });
       if (r.ok) data = await r.json();
     } catch {}
     loading = false;

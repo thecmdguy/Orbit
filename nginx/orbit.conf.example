@@ -8,8 +8,8 @@
 #   4. Get a TLS cert (see INSTALL.md — certbot) and point ssl_certificate at it.
 #   5. Ports below (3020–3025) must match your .env.
 #
-# The app is mounted under /claude. To change that, also set ORBIT_BASE and adjust
-# every "/claude" path here to match.
+# The app is mounted under /orbit. To change that, also set ORBIT_BASE and adjust
+# every "/orbit" path here to match.
 
 server {
     listen 443 ssl;
@@ -24,12 +24,12 @@ server {
     client_max_body_size 110m;
 
     # Redirect the bare path to the app.
-    location = /claude { return 301 /claude/; }
+    location = /orbit { return 301 /orbit/; }
 
     # ---- Login check used by the side services (internal subrequest) ----
-    location = /claude/__authcheck {
+    location = /orbit/__authcheck {
         internal;
-        proxy_pass http://127.0.0.1:3020/claude/api/quick;
+        proxy_pass http://127.0.0.1:3020/orbit/api/quick;
         proxy_method GET;
         proxy_pass_request_body off;
         proxy_set_header Content-Length "";
@@ -37,20 +37,20 @@ server {
     }
 
     # ---- Side services (each behind the login) ----
-    location = /claude/api/usage {
-        auth_request /claude/__authcheck;
+    location = /orbit/api/usage {
+        auth_request /orbit/__authcheck;
         proxy_pass http://127.0.0.1:3021;
         proxy_set_header Host $host;
     }
-    location = /claude/api/explain {
-        auth_request /claude/__authcheck;
+    location = /orbit/api/explain {
+        auth_request /orbit/__authcheck;
         proxy_pass http://127.0.0.1:3025;
         proxy_set_header Host $host;
         proxy_set_header Origin $http_origin;
         proxy_read_timeout 30s;
     }
-    location ^~ /claude/api/models/ {
-        auth_request /claude/__authcheck;
+    location ^~ /orbit/api/models/ {
+        auth_request /orbit/__authcheck;
         proxy_pass http://127.0.0.1:3022;
         proxy_set_header Host $host;
         proxy_set_header Origin $http_origin;
@@ -58,21 +58,21 @@ server {
         proxy_read_timeout 900s;
         client_max_body_size 60m;
     }
-    location ^~ /claude/api/skills/ {
-        auth_request /claude/__authcheck;
+    location ^~ /orbit/api/skills/ {
+        auth_request /orbit/__authcheck;
         proxy_pass http://127.0.0.1:3023;
         proxy_set_header Host $host;
         proxy_set_header Origin $http_origin;
         proxy_read_timeout 180s;
     }
-    location ^~ /claude/api/push/ {
-        auth_request /claude/__authcheck;
+    location ^~ /orbit/api/push/ {
+        auth_request /orbit/__authcheck;
         proxy_pass http://127.0.0.1:3024;
         proxy_set_header Host $host;
         proxy_set_header Origin $http_origin;
     }
-    location ^~ /claude/api/chats/ {
-        auth_request /claude/__authcheck;
+    location ^~ /orbit/api/chats/ {
+        auth_request /orbit/__authcheck;
         proxy_pass http://127.0.0.1:3024;
         proxy_set_header Host $host;
         proxy_set_header Origin $http_origin;
@@ -80,12 +80,12 @@ server {
     }
 
     # ---- PWA assets (public; iOS fetches these without cookies) ----
-    location = /claude/manifest.webmanifest { alias /path/to/orbit/public/pwa/manifest.webmanifest; default_type application/manifest+json; }
-    location = /claude/sw.js { alias /path/to/orbit/public/pwa/sw.js; default_type application/javascript; add_header Service-Worker-Allowed "/claude/" always; }
-    location ^~ /claude/pwa/ { alias /path/to/orbit/public/pwa/; add_header Cache-Control "public, max-age=86400" always; }
+    location = /orbit/manifest.webmanifest { alias /path/to/orbit/public/pwa/manifest.webmanifest; default_type application/manifest+json; }
+    location = /orbit/sw.js { alias /path/to/orbit/public/pwa/sw.js; default_type application/javascript; add_header Service-Worker-Allowed "/orbit/" always; }
+    location ^~ /orbit/pwa/ { alias /path/to/orbit/public/pwa/; add_header Cache-Control "public, max-age=86400" always; }
 
     # ---- Everything else -> the main Orbit server (with WebSocket upgrade) ----
-    location ^~ /claude/ {
+    location ^~ /orbit/ {
         proxy_pass http://127.0.0.1:3020;
         proxy_http_version 1.1;
         proxy_set_header Host $host;

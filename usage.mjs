@@ -1,5 +1,5 @@
 // Orbit live usage service (pm2 orbit-usage, 127.0.0.1:3021).
-// nginx serves it at /claude/api/usage behind an auth_request to Orbit's own login check,
+// nginx serves it at /orbit/api/usage behind an auth_request to Orbit's own login check,
 // so it runs separately and Orbit never needs a restart for it.
 // - Plan limits come from the same endpoint the CLI's /usage uses (OAuth token from ~/.claude/.credentials.json).
 // - Token counts come from the local session logs (~/.claude/projects/**/*.jsonl), read incrementally.

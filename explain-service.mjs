@@ -1,6 +1,6 @@
 // Orbit explain service (pm2 orbit-explain, 127.0.0.1:3025).
-// nginx serves it at /claude/api/explain behind an auth_request to Orbit's login check,
-// so it runs separately and Orbit (claude-web) never needs a restart for explain changes.
+// nginx serves it at /orbit/api/explain behind an auth_request to Orbit's login check,
+// so it runs separately and the main Orbit server never needs a restart for explain changes.
 // The actual explanation logic lives in explain.mjs (direct Messages API, SDK fallback).
 import http from 'node:http';
 import cfg from './config.mjs';

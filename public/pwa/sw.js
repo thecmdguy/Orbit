@@ -12,9 +12,9 @@ self.addEventListener('push', (e) => {
     body: d.body || '',
     tag: d.tag || undefined,
     renotify: !!d.tag,
-    icon: '/claude/pwa/icon-192.png',
-    badge: '/claude/pwa/icon-192.png',
-    data: { url: d.url || '/claude/', kind: d.kind || '' },
+    icon: '/orbit/pwa/icon-192.png',
+    badge: '/orbit/pwa/icon-192.png',
+    data: { url: d.url || '/orbit/', kind: d.kind || '' },
     timestamp: d.at || Date.now(),
     requireInteraction: d.kind === 'approval',
   };
@@ -28,10 +28,10 @@ self.addEventListener('push', (e) => {
 
 self.addEventListener('notificationclick', (e) => {
   e.notification.close();
-  const url = new URL(e.notification.data?.url || '/claude/', self.location.origin).href;
+  const url = new URL(e.notification.data?.url || '/orbit/', self.location.origin).href;
   e.waitUntil((async () => {
     const all = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
-    const c = all.find((w) => w.url.startsWith(self.location.origin + '/claude'));
+    const c = all.find((w) => w.url.startsWith(self.location.origin + '/orbit'));
     if (c) {
       try { await c.focus(); } catch {}
       c.postMessage({ type: 'orbit:navigate', url });

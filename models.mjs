@@ -1,7 +1,7 @@
 // Orbit models service (pm2 orbit-models, 127.0.0.1:3022).
 // Lets Orbit chat with non-Claude models: any OpenAI-compatible API (OpenAI, Gemini, OpenRouter,
 // Groq, DeepSeek, Mistral, xAI, Together, Anthropic's compat layer) and local servers (Ollama,
-// LM Studio, llama.cpp, vLLM). nginx serves it at /claude/api/models/* behind the same
+// LM Studio, llama.cpp, vLLM). nginx serves it at /orbit/api/models/* behind the same
 // auth_request as the usage widget, so Orbit itself never needs a restart for it.
 //
 // Providers marked where:"browser" are called straight from the browser (e.g. Ollama on the

@@ -41,16 +41,16 @@ browser  ──WebSocket──>  server.mjs  ──@anthropic-ai/claude-agent-sd
 
 The main server serves everything under its base path and enforces the login itself. The five
 side services are separate processes, so in production **nginx** puts them behind the same login
-using an `auth_request` subrequest to the main server (`/claude/api/quick`, a cheap authed
+using an `auth_request` subrequest to the main server (`/orbit/api/quick`, a cheap authed
 endpoint). See `nginx/orbit.conf.example`.
 
 ```
              ┌──────────────── nginx (443, TLS) ───────────────┐
-browser ───> │  /claude/api/usage   ─auth_request─> :3020       │ ─> :3021
-             │  /claude/api/skills  ─auth_request─> :3020       │ ─> :3023
-             │  /claude/api/push    ─auth_request─> :3020       │ ─> :3024
-             │  /claude/api/explain ─auth_request─> :3020       │ ─> :3025
-             │  /claude/…  (everything else, incl. WebSockets)  │ ─> :3020
+browser ───> │  /orbit/api/usage   ─auth_request─> :3020       │ ─> :3021
+             │  /orbit/api/skills  ─auth_request─> :3020       │ ─> :3023
+             │  /orbit/api/push    ─auth_request─> :3020       │ ─> :3024
+             │  /orbit/api/explain ─auth_request─> :3020       │ ─> :3025
+             │  /orbit/…  (everything else, incl. WebSockets)  │ ─> :3020
              └──────────────────────────────────────────────────┘
 ```
 

@@ -10,7 +10,7 @@
   };
 
   async function api(pathname, body) {
-    const r = await fetch('/claude/api/' + pathname, body === undefined ? { cache: 'no-store' } : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const r = await fetch('/orbit/api/' + pathname, body === undefined ? { cache: 'no-store' } : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) { const e = new Error(j.error || 'Request failed'); e.status = r.status; e.data = j; throw e; }
     return j;
@@ -57,10 +57,10 @@
       window.MonacoEnvironment = {
         getWorkerUrl() {
           const o = location.origin;
-          return URL.createObjectURL(new Blob([`self.MonacoEnvironment = { baseUrl: '${o}/claude/' }; importScripts('${o}/claude/vs/base/worker/workerMain.js');`], { type: 'text/javascript' }));
+          return URL.createObjectURL(new Blob([`self.MonacoEnvironment = { baseUrl: '${o}/orbit/' }; importScripts('${o}/orbit/vs/base/worker/workerMain.js');`], { type: 'text/javascript' }));
         },
       };
-      window.require.config({ paths: { vs: location.origin + '/claude/vs' } });
+      window.require.config({ paths: { vs: location.origin + '/orbit/vs' } });
       window.require(['vs/editor/editor.main'], () => {
         monaco = window.monaco;
         monaco.editor.defineTheme('pg-dark', { base: 'vs-dark', inherit: true, rules: [], colors: {

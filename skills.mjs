@@ -1,6 +1,6 @@
 // Orbit skills service (pm2 orbit-skills, 127.0.0.1:3023).
 // Installs Claude Code skills from GitHub into ~/.claude/skills/<name>/ and manages them.
-// nginx puts /claude/api/skills/ behind the Orbit login (auth_request); writes also need an allowed Origin (ORBIT_ORIGINS).
+// nginx puts /orbit/api/skills/ behind the Orbit login (auth_request); writes also need an allowed Origin (ORBIT_ORIGINS).
 // Downloaded repos are treated as data only: extracted with system tar into a fresh temp dir, never executed,
 // symlinks are dropped when copying.
 import http from 'node:http';

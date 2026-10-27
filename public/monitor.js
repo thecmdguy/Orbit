@@ -178,11 +178,11 @@
 
   // ---------- data ----------
   async function loadLinks() {
-    try { links = await (await fetch('/claude/api/links', { cache: 'no-store' })).json(); } catch {}
+    try { links = await (await fetch('/orbit/api/links', { cache: 'no-store' })).json(); } catch {}
     renderLinks(); renderSummaryBadgeOnly();
   }
   async function saveLinks(next) {
-    const r = await fetch('/claude/api/links', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(next) });
+    const r = await fetch('/orbit/api/links', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(next) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) return window.App.toast(j.error || 'Could not save');
     links = j; renderLinks(); renderAll();
@@ -191,7 +191,7 @@
   async function restart(name, btn) {
     if (!confirm(`Restart ${name}?`)) return;
     btn.disabled = true; btn.textContent = 'Restarting…';
-    const r = await fetch('/claude/api/pm2/restart', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) }).then((x) => x.json()).catch(() => ({ ok: false }));
+    const r = await fetch('/orbit/api/pm2/restart', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) }).then((x) => x.json()).catch(() => ({ ok: false }));
     window.App.toast(r.ok ? `${name} restarted` : `Restart failed: ${r.error || 'error'}`);
     btn.disabled = false; btn.textContent = 'Restart';
   }
@@ -201,7 +201,7 @@
   async function openLogs(name) {
     logsName = name; $('#logsTitle').textContent = name + ' logs';
     $('#logs').hidden = false; $('#logsBody').textContent = 'Loading…';
-    try { logsData = await (await fetch('/claude/api/pm2/logs?name=' + encodeURIComponent(name), { cache: 'no-store' })).json(); } catch { logsData = { err: 'Could not load logs', out: '' }; }
+    try { logsData = await (await fetch('/orbit/api/pm2/logs?name=' + encodeURIComponent(name), { cache: 'no-store' })).json(); } catch { logsData = { err: 'Could not load logs', out: '' }; }
     if (logsTab === 'err' && !logsData.err && logsData.out) logsTab = 'out';
     showLogs();
   }

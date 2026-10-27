@@ -1,7 +1,7 @@
 // Skills view (#/skills): install Claude skills from GitHub, view / update / disable / remove them.
-// Backend: orbit-skills (skills.mjs, :3023) at /claude/api/skills/. Skills live in ~/.claude/skills/<name>/.
+// Backend: orbit-skills (skills.mjs, :3023) at /orbit/api/skills/. Skills live in ~/.claude/skills/<name>/.
 (() => {
-  const API = '/claude/api/skills/';
+  const API = '/orbit/api/skills/';
   const $ = (s, el = document) => el.querySelector(s);
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const toast = (t) => window.App?.toast(t);
